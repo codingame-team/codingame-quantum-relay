@@ -1,0 +1,35 @@
+read width:int height:int leagueLevel:int
+read myBaseX:int myBaseY:int oppBaseX:int oppBaseY:int
+gameloop
+read pulsarCount:int
+loop pulsarCount read pulsarId:int px:int py:int energy:int
+read droneCount:int
+loop droneCount read droneId:int owner:int x:int y:int linkTarget:int cooldown:int
+write join("MOVE", "500", "450", "LINK", "-1")
+
+STATEMENT
+Deploy your quantum relay drones across deep space! Route unstable pulsar energy back to your Mothership through laser relay chains while cutting enemy beams.
+
+INPUT
+width: Width of the space sector (1600)
+height: Height of the space sector (900)
+leagueLevel: Current league level (1=Wood 2, 2=Wood 1, 3=Bronze+)
+myBaseX: X coordinate of your Mothership
+myBaseY: Y coordinate of your Mothership
+oppBaseX: X coordinate of opponent Mothership
+oppBaseY: Y coordinate of opponent Mothership
+pulsarCount: Number of energy pulsars in the sector
+pulsarId: Unique ID of the pulsar
+px: X coordinate of the pulsar
+py: Y coordinate of the pulsar
+energy: Current available energy in the pulsar
+droneCount: Total number of relay drones
+droneId: Unique ID of the drone
+owner: 0 if you own this drone (listed first), 1 if owned by opponent
+x: X coordinate of the drone
+y: Y coordinate of the drone
+linkTarget: Current relay target (-2=none, -1=Mothership, or friendly droneId)
+cooldown: Turns remaining before OVERCHARGE is available again
+
+OUTPUT
+One line per owned drone: MOVE <x> <y> [LINK <targetId>] [MSG <text>] | OVERCHARGE <targetId> [MSG <text>]

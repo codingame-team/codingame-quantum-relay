@@ -1,0 +1,10 @@
+target/
+game.zip
+export.json
+build_resp.json
+build_status.json
+save_resp.json
+update_resp.json
+.DS_Store
+.idea/
+*.iml

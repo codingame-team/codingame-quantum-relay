@@ -1,0 +1,79 @@
+<div id="statement_back" class="statement_back" style="display:none"></div>
+<div class="statement-body">
+  <!-- LEAGUE ALERT -->
+  <div style="color: #7cc576; background-color: rgba(124, 197, 118,.1); padding: 20px; margin-bottom: 15px; text-align: left">
+    <p style="margin-bottom: 0"><b>Bronze+ League:</b> <b>Quantum Beam Interference</b> is now active! If two opposing laser beams geometrically cross each other, both are shorted out (<const>0</const> flow) unless one is <code>OVERCHARGE</code>d!</p>
+  </div>
+
+  <!-- GOAL -->
+  <div class="statement-section statement-goal">
+    <h1><span class="icon icon-goal">&nbsp;</span><span>The Goal</span></h1>
+    <div class="statement-goal-content">
+      Route more quantum energy from deep-space <b>Pulsars</b> to your <b>Mothership</b> than your opponent over <b>100 turns</b>.
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div class="statement-section statement-rules">
+    <h1><span class="icon icon-rules">&nbsp;</span><span>Rules</span></h1>
+    <div class="statement-rules-content">
+      <p>The game takes place in a <b>1600&times;900</b> space sector containing two <b>Motherships</b> and <b>5 Pulsars</b>:</p>
+      <ul>
+        <li><b>Drone Movement (<action>MOVE x y</action>):</b> A drone moves up to <const>120</const> units per turn toward <var>(x, y)</var>.</li>
+        <li><b>Laser Relay Links (<action>LINK targetId</action>):</b> Each drone can project one outgoing laser beam up to <const>480</const> units to either its Mothership (<var>targetId = -1</var>) or another friendly drone (<var>targetId = droneId</var>). Default bandwidth is <const>6</const> energy/turn.</li>
+        <li><b>Overcharge (<action>OVERCHARGE targetId</action>):</b> Requires <var>cooldown == 0</var>. The drone holds its current position, links to <var>targetId</var>, and boosts its outgoing beam capacity to <const>12</const> energy/turn for this turn (sets <var>cooldown = 2</var>).</li>
+        <li><b>Quantum Beam Interference:</b> If a player's active beam segment <var>[A, B]</var> geometrically intersects an opponent's active beam segment <var>[C, D]</var>:
+          <ul>
+            <li><b>Normal vs Normal (or Overcharged vs Overcharged):</b> Both beams short out (<const>0</const> effective bandwidth).</li>
+            <li><b>Overcharged vs Normal:</b> The normal beam is severed (<const>0</const> bandwidth), while the Overcharged beam retains <const>6</const> bandwidth!</li>
+          </ul>
+        </li>
+        <li><b>Energy Harvesting &amp; Flow:</b> Any drone within <const>200</const> units of a Pulsar that has a valid relay path to its Mothership routes energy from that Pulsar to the Mothership, constrained by the minimum remaining bandwidth along its relay path. Pulsars regenerate <const>+3</const> to <const>+4</const> energy at the end of each turn.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PROTOCOL -->
+  <div class="statement-section statement-protocol">
+    <h1><span class="icon icon-protocol">&nbsp;</span><span>Game Input &amp; Output</span></h1>
+    <div class="statement-protocol-content">
+      <div class="blk">
+        <div class="title">Initialization Input</div>
+        <div class="text">
+          Line 1: <var>width</var> <var>height</var> <var>leagueLevel</var> (<const>1600 900</const> and league level).<br>
+          Line 2: <var>myBaseX</var> <var>myBaseY</var> <var>oppBaseX</var> <var>oppBaseY</var>.
+        </div>
+      </div>
+      <div class="blk">
+        <div class="title">Input for One Game Turn</div>
+        <div class="text">
+          <ul>
+            <li>Line 1: <var>pulsarCount</var>, the number of Pulsars.</li>
+            <li>Next <var>pulsarCount</var> lines: <var>pulsarId</var> <var>px</var> <var>py</var> <var>energy</var>.</li>
+            <li>Next line: <var>droneCount</var>, total number of drones.</li>
+            <li>Next <var>droneCount</var> lines: <var>droneId</var> <var>owner</var> <var>x</var> <var>y</var> <var>linkTarget</var> <var>cooldown</var> (<var>owner</var> is <const>0</const> for your drones, listed first, and <const>1</const> for opponent drones).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="blk">
+        <div class="title">Output for One Game Turn</div>
+        <div class="text">
+          Output <b>one line per owned drone</b> (in the exact order they appear in the input):
+          <ul>
+            <li><action>MOVE x y</action> (optionally followed by <action>LINK targetId</action>, where <const>-1</const> is your Mothership or <var>droneId</var> is a friendly drone)</li>
+            <li>or <action>OVERCHARGE targetId</action> (holds position and doubles beam capacity to <const>12</const>)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOURCE CODE -->
+  <div class="statement-section statement-examples">
+    <h1><span class="icon icon-example">&nbsp;</span><span>Source Code</span></h1>
+    <div class="statement-examples-text">
+      The full referee, viewer, and starter bots source code is available on GitHub:
+      <a href="https://github.com/pmourey/codingame-quantum-relay" target="_blank" rel="noopener noreferrer">https://github.com/pmourey/codingame-quantum-relay</a>
+    </div>
+  </div>
+</div>
