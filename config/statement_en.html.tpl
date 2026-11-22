@@ -99,7 +99,12 @@
           <li><var>owner</var>: <const>0</const> if you own this drone (your drones are always listed first), <const>1</const> if owned by your opponent.</li>
           <li><var>x</var>, <var>y</var>: current coordinates of the drone.</li>
           <li><var>linkTarget</var>: current relay target (<const>-2</const> for none, <const>-1</const> for Mothership, or a friendly <var>droneId</var>).</li>
+          <!-- BEGIN level1 -->
+          <li><var>cooldown</var>: always <const>0</const> in this league.</li>
+          <!-- END -->
+          <!-- BEGIN level2 level3 -->
           <li><var>cooldown</var>: turns remaining before <action>OVERCHARGE</action> is available again.</li>
+          <!-- END -->
         </ul>
       </div>
     </div>

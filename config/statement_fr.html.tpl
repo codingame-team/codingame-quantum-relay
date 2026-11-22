@@ -99,7 +99,12 @@
           <li><var>owner</var> : <const>0</const> si vous possédez ce drone (vos drones sont toujours listés en premier), <const>1</const> s'il appartient à l'adversaire.</li>
           <li><var>x</var>, <var>y</var> : coordonnées actuelles du drone.</li>
           <li><var>linkTarget</var> : cible actuelle du faisceau (<const>-2</const> pour aucune, <const>-1</const> pour le Vaisseau-Mère, ou un <var>droneId</var> allié).</li>
+          <!-- BEGIN level1 -->
+          <li><var>cooldown</var> : toujours <const>0</const> dans cette ligue.</li>
+          <!-- END -->
+          <!-- BEGIN level2 level3 -->
           <li><var>cooldown</var> : nombre de tours restants avant que <action>OVERCHARGE</action> soit à nouveau disponible.</li>
+          <!-- END -->
         </ul>
       </div>
     </div>
