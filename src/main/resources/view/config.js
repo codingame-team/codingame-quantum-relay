@@ -28,3 +28,5 @@ export const options = [
         default: true
     })
 ];
+
+export const overlayAlpha = 0;
