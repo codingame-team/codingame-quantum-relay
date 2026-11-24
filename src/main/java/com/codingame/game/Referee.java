@@ -78,10 +78,11 @@ public class Referee extends AbstractReferee {
         spawnDrones(p0, p1);
         initGraphics();
 
-        // Send initialization inputs (always from each player's perspective: myBase first, oppBase second)
+        // Send initialization inputs (3=Wood 3, 2=Wood 2, 1=Wood 1; myBase first, oppBase second)
+        int woodDivision = Math.max(1, 4 - leagueLevel);
         for (Player player : gameManager.getActivePlayers()) {
             Player opp = gameManager.getPlayer(1 - player.getIndex());
-            player.sendInputLine(String.format("%d %d %d", SECTOR_WIDTH, SECTOR_HEIGHT, leagueLevel));
+            player.sendInputLine(String.format("%d %d %d", SECTOR_WIDTH, SECTOR_HEIGHT, woodDivision));
             player.sendInputLine(String.format("%d %d %d %d",
                 player.getBaseX(), player.getBaseY(), opp.getBaseX(), opp.getBaseY()));
         }
@@ -170,7 +171,9 @@ public class Referee extends AbstractReferee {
             .setAnchor(0.5)
             .setFontFamily("Lato")
             .setFontSize(36)
-            .setFillColor(0xb8d8ff)
+            .setFillColor(0xffffff)
+            .setStrokeThickness(4)
+            .setStrokeColor(0x000000)
             .setZIndex(30);
 
         // Player HUDs & Motherships
@@ -401,7 +404,7 @@ public class Referee extends AbstractReferee {
 
         // 1. Send inputs to each active player (Owner is ALWAYS 0 for self, 1 for opponent)
         for (Player player : gameManager.getActivePlayers()) {
-            sendTurnInput(player);
+            sendTurnInput(player, turn);
             player.execute();
         }
 
@@ -437,8 +440,9 @@ public class Referee extends AbstractReferee {
         checkEarlyEnd(turn);
     }
 
-    private void sendTurnInput(Player player) {
+    private void sendTurnInput(Player player, int turn) {
         int myIdx = player.getIndex();
+        player.sendInputLine(String.valueOf(turn));
         player.sendInputLine(String.valueOf(pulsars.size()));
         for (Pulsar p : pulsars) {
             player.sendInputLine(String.format("%d %d %d %d",

@@ -12,6 +12,7 @@ class Player {
         int oppBaseY = in.nextInt();
 
         while (true) {
+            int turn = in.nextInt();
             int pulsarCount = in.nextInt();
             List<int[]> pulsars = new ArrayList<>();
             for (int i = 0; i < pulsarCount; i++) {

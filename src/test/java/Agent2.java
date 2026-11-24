@@ -5,13 +5,14 @@ public class Agent2 {
         Scanner in = new Scanner(System.in);
         int width = in.nextInt();
         int height = in.nextInt();
-        int leagueLevel = in.nextInt();
+        int leagueLevel = 4 - in.nextInt();
         int myBaseX = in.nextInt();
         int myBaseY = in.nextInt();
         int oppBaseX = in.nextInt();
         int oppBaseY = in.nextInt();
 
         while (true) {
+            int turn = in.nextInt();
             int pulsarCount = in.nextInt();
             List<int[]> pulsars = new ArrayList<>();
             for (int i = 0; i < pulsarCount; i++) {
